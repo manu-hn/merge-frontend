@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import Login from "./components/auth/login"
-import Register from "./components/auth/register"
+import Login from "@/components/auth/login"
+import Register from "@/components/auth/register"
 import BodyContainer from "./container"
 
 function App() {

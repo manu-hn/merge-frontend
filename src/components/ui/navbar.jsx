@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import MergeLogo from "../../assets/logo/merge-logo.png";
+import MergeLogo from "@/assets/logo/merge-logo.png";
+import { useSelector } from "react-redux";
+import { USER_ICON_IMAGE } from "@/utils/constants";
 
 
 const Navbar = () => {
+  const loggedInUser = useSelector((store)=>store.user);
   return (
     <div className="navbar bg-base-200 shadow-sm">
       <div className="flex-1">
@@ -11,15 +14,18 @@ const Navbar = () => {
 
         </Link>
       </div>
-      <div className="flex gap-2">
-
+   
+      {
+        loggedInUser ? (
+          <div className="flex gap-2 items-center">
+Welcome {loggedInUser.firstName}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
 
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                src={`${loggedInUser?.photoUrl || USER_ICON_IMAGE}`} />
             </div>
           </div>
           <ul
@@ -36,6 +42,13 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+        ) : (
+             <div>
+        <Link to="/login" className="btn btn-primary">Login</Link>
+      </div>
+        )
+      }
+      
     </div>
   )
 }

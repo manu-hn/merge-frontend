@@ -16,7 +16,7 @@ const BodyContainer = () => {
     if(loggedInUser) return;
     try {
       const response = await axios.get(BASE_URL + "profile/view", { withCredentials: true, });
-      dispatch(loginUser(response.data))
+      dispatch(loginUser(response.data?.data))
    
     } catch (error) {
       if (error.status === 401) {

@@ -17,6 +17,7 @@ const ProfilePage = () => {
   });
 
 
+  console.log(user)
 
   useEffect(() => {
     if (!user) return;
@@ -41,23 +42,25 @@ const ProfilePage = () => {
     }))
   }
 
-  async function updateUserDetails(eve){
+  async function updateUserDetails(eve) {
     eve.preventDefault();
     try {
-      const response = await axios.patch(BASE_URL+'profile/edit',{...userForm, gender : user.gender, interests : user.interests},{withCredentials : true,});
+      const response = await axios.patch(BASE_URL + 'profile/edit', { ...userForm, gender: user.gender, interests: user.interests }, { withCredentials: true, });
       console.log(response)
-      
+
     } catch (error) {
       console.log(error)
     }
   }
   return (
-    <section>
-      <div className="w-[80%] md:w-[70%] max-w-4xl mx-auto p-4">
+    <section className='overflow-y-auto' >
+      <div className="w-[80%] md:w-[70%] max-w-4xl mx-auto p-4 h-screen">
         <h1 className="text-2xl font-bold mb-4">Profile</h1>
-        {user && (
-          <form onSubmit={updateUserDetails} className='flex bg-base-300 p-[2%] rounded-lg justify-between gap-[2.5%]'>
-            <section className="  rounded-lg shadow-md w-full">
+        <div className='mb-[10%]'>
+          {user && (
+          <form onSubmit={updateUserDetails} 
+          className='flex p-[2%] rounded-lg justify-between gap-[2.5%] my-[2%] overflow-y-auto '>
+            <section className="rounded-lg shadow-md w-full bg-base-300 p-[2%]">
               <div className='flex flex-col'>
                 <label htmlFor="firstName">First Name</label>
                 <input type="text" value={userForm.firstName}
@@ -90,9 +93,20 @@ const ProfilePage = () => {
                   id={'photoUrl'} placeholder='Profile Photo' />
               </div>
             </section>
-            <div>
-              <div className='h-[40vh] w-[40vh] flex justify-center items-center'>
+            <div className='bg-base-300 p-[2%] rounded-lg flex flex-col justify-between w-full'>
+              <div className='h-[45vh] w-full flex justify-center items-center'>
                 <img src={userForm.photoUrl} alt={`${user.firstName} Photo`} className='w-full h-full' />
+              </div>
+              <div className='p-[2%] w-full'>
+                {
+                  user?.interests?.length > 0 && (
+                    <ul className='flex justify-between gap-[1%] w-full '>
+                      {user.interests?.map((skill) => (<li className={`p-[1.5%] bg-gray-950 rounded-lg`} key={skill}>{skill}</li>))}
+                    </ul>
+
+                  )
+                }
+
               </div>
               <div className='my-[2%] w-full flex justify-center'>
                 <button className='bg-primary px-[3%] py-[1%] rounded-lg text-white font-semibold cursor-pointer'>
@@ -101,8 +115,8 @@ const ProfilePage = () => {
               </div>
             </div>
           </form>
-
         )}
+        </div>
       </div>
     </section>
   )

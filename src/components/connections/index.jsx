@@ -26,13 +26,13 @@ const MyConnections = () => {
     fetchMyConnections()
   }, [])
 
-  console.log('Connections : ', connections)
+
   if (!connections) return null;
 
   if (connections.length === 0) return <h2>No Connectiond Found</h2>
   return (
     <article className='w-full flex justify-center min-h-[calc(100vh-45vh)] items-center'>
-      <section className={`w-[95%]`}>
+      <section className={`w-[95%] h-[72.5vh] flex flex-col gap-y-4 my-[2%]`}>
         {
           connections?.map((item) => (
             <div key={item?._id} className={`bg-base-300 p-[2%] w-2/5 flex gap-[2%] rounded-lg mx-auto`}>
@@ -44,7 +44,7 @@ const MyConnections = () => {
                 {item?.age && item?.gender && <p>age : {item?.age}  {item?.gender}</p>}
                 <p>{item?.emailId}</p>
 
-                <p>interests :</p>
+                <p>Interests :</p>
                 <div className='w-full flex flex-wrap justify-evenly gap-[2%] gap-y-2'>
                   {item?.interests?.map((interest) => (<p className={'p-[1.5%] bg-slate-700 rounded-lg'} key={interest}>{interest}</p>))}
                 </div>

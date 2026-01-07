@@ -4,7 +4,7 @@ import MergeLogo from "../../assets/logo/merge-logo.png";
 
 const Footer = () => {
     return (
-        <footer className="footer sm:footer-horizontal bg-base-200 fixed bottom-0 text-neutral-content p-10">
+        <footer className="footer sm:footer-horizontal bg-base-200 text-neutral-content p-10">
             <aside>
                 <Link to="/" className="btn btn-ghost text-xl w-[17.5%]">
                     <img className={``} src={MergeLogo} slot="Merge Logo" />

@@ -34,7 +34,6 @@ const FeedPage = () => {
            <UsedCard  user={userFeed?.[0]} />
         )
       }
-    
     </section>
   )
 }

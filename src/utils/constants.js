@@ -27,6 +27,14 @@ export const REGISTRATION_FIELDS = [
 
     },
      {
+        id : "mobileNumber",
+        type : "number",
+        placeHolder : "Enter Mobile Number",
+        label : "Mobile Number",
+        required : true,
+
+    },
+     {
         id : "password",
         type : "password",
         placeHolder : "Enter Password",

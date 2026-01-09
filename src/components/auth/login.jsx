@@ -8,8 +8,8 @@ import Register from './register';
 
 const Login = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
-  const [emailId, setEmailId] = useState('hadid.gigi@gmail.com');
-  const [password, setPassword] = useState('Gigi@Hadid123');
+  const [emailId, setEmailId] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

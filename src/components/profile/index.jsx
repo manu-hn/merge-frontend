@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { BASE_URL } from '@/utils/constants';
+import { BASE_URL, USER_ICON_IMAGE } from '@/utils/constants';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const ProfilePage = () => {
   });
 
 
-  console.log(user)
+
 
   useEffect(() => {
     if (!user) return;
@@ -95,7 +95,14 @@ const ProfilePage = () => {
             </section>
             <div className='bg-base-300 p-[2%] rounded-lg flex flex-col justify-between w-full'>
               <div className='h-[45vh] w-full flex justify-center items-center'>
-                <img src={userForm.photoUrl} alt={`${user.firstName} Photo`} className='w-full h-full' />
+                {
+                  userForm?.photoUrl ? (
+                    <img src={userForm.photoUrl} alt={`${user.firstName} Photo`} className='w-full h-full' />
+                  ) : (
+                    <img src={USER_ICON_IMAGE} alt={`${user.firstName} Photo`} className='w-full h-full' />
+                  )
+                }
+                
               </div>
               <div className='p-[2%] w-full'>
                 {

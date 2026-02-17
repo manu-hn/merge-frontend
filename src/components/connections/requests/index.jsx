@@ -42,7 +42,10 @@ const ConnectionRequests = () => {
 
     if (!requests) return null;
 
-    if (requests.length === 0) return <h2>No Requests Found</h2>
+    if (requests.length === 0) return <section className='min-h-[calc(100vh-30vh)] flex justify-center items-center'>
+     <h2>No Requests Found</h2>
+  </section>
+    
     return (
         <article className='w-full flex justify-center min-h-[calc(100vh-45vh)] items-center overflow-auto'>
             <section className={`w-[95%] my-[2%] h-[72.5vh] flex flex-col gap-y-4`}>

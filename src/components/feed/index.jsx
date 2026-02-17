@@ -28,7 +28,7 @@ const FeedPage = () => {
     <p className='text-center'>No User Available</p>
   </div>;
   return userFeed && (
-    <section className='min-h-screen'>
+    <section className='min-h-[calc(100vh-30vh)]'>
           {
         userFeed && (
            <UsedCard  user={userFeed?.[0]} />

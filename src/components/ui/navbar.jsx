@@ -4,70 +4,105 @@ import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL, USER_ICON_IMAGE } from "@/utils/constants";
 import { logoutUser } from "@/store/slices/user-slice";
 import axios from "axios";
+import { useState } from "react";
 
 
 const Navbar = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const loggedInUser = useSelector((store) => store.user);
-  const navigate=useNavigate();
-  const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const logout =async ()=>{
+  const logout = async () => {
     try {
-      await axios.post(BASE_URL+'logout/user', {}, {withCredentials : true,});
+      await axios.post(BASE_URL + 'logout/user', {}, { withCredentials: true, });
       dispatch(logoutUser());
       navigate("/login");
-      
+
     } catch (error) {
       console.error(error);
     }
   }
 
-  
   return (
-    <div className="navbar bg-base-200 shadow-sm">
-      <div className="flex-1">
+    <header className="sticky top-0 left-0 right-0 z-50 border-b border-base-100 bg-black/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="btn btn-ghost text-xl w-[17.5%]">
           <img className={``} src={MergeLogo} slot="Merge Logo" />
         </Link>
+
+        <nav className="hidden items-center gap-8 md:flex">
+          <Link href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            How It Works
+          </Link>
+          <Link href="#who-its-for" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Who It{"'"}s For
+          </Link>
+          <Link href="#why-merge" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Why Merge
+          </Link>
+        </nav>
+
+        <div className="hidden items-center gap-4 md:flex">
+          {
+            loggedInUser ? (
+
+              <>
+                <button onClick={logout} variant="ghost" size="sm" className="btn bg-red-500 text-white hover:text-foreground">
+                  Sign Out
+                </button>
+              </>
+
+            ) : (
+              <>
+                <Link to={"/login"} className="text-muted-foreground hover:text-foreground">
+                  Sign In
+                </Link>
+
+                <button size="sm" className="btn btn-primary bg-primary text-primary-foreground hover:bg-primary/90">
+                  Join Waitlist
+                </button>
+              </>
+            )
+          }
+
+
+        </div>
+
+        <button
+          type="button"
+          className="md:hidden text-foreground"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {/* {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />} */}
+        </button>
       </div>
 
-      {
-        loggedInUser ? (
-          <div className="flex gap-2 items-center">
-            Welcome {loggedInUser.firstName}
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img
-
-                    alt="Tailwind CSS Navbar component"
-                    src={`${loggedInUser?.photoUrl || USER_ICON_IMAGE}`} />
-                </div>
-              </div>
-              <ul
-                tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                <li>
-                  <Link to="/profile" className="justify-between">
-                    Profile
-                    {/* <span className="badge">New</span> */}
-                  </Link>
-                </li>
-                <li><Link to="/connections" >My Connections</Link></li>
-
-                <li><Link to="/connections/requests">Requests</Link></li>
-                <li><p onClick={logout}>Logout</p></li>
-              </ul>
+      {mobileMenuOpen && (
+        <div className="border-t border-border/50 bg-background px-6 py-4 md:hidden">
+          <nav className="flex flex-col gap-4">
+            <Link href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              How It Works
+            </Link>
+            <Link href="#who-its-for" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Who It{"'"}s For
+            </Link>
+            <Link href="#why-merge" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Why Merge
+            </Link>
+            <div className="flex flex-col gap-2 pt-4 border-t border-border/50">
+              <Button variant="ghost" size="sm" className="justify-start text-muted-foreground hover:text-foreground">
+                Sign In
+              </Button>
+              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Join Waitlist
+              </Button>
             </div>
-          </div>
-        ) : (
-          <div>
-            <Link to="/login" className="btn btn-primary">Login</Link>
-          </div>
-        )
-      }
-
-    </div>
+          </nav>
+        </div>
+      )}
+    </header>
   )
 }
 

@@ -22,13 +22,13 @@ const Login = () => {
         { withCredentials: true, });
 
       dispatch(loginUser(response.data.data));
-      navigate("/")
+      navigate("/feed")
     } catch (error) {
       console.error("Login failed:", error);
     }
   }
   return (
-    <section className={`flex justify-center items-center p-10 text-[4vw] md:text-[2vw] lg:text-[1.5vw]`}>
+    <section className={`flex justify-center bg-black items-center p-10 text-[4vw] md:text-[2vw] lg:text-[1.5vw] md:min-h-[calc(100vh-30vh)]`}>
       <div className='p-[2%] bg-base-300 card card-border w-96'>
         {
           isLoginForm ? (
@@ -60,7 +60,7 @@ const Login = () => {
             </div>
           ) : (<Register />)
         }
-        <div className='my-[2%]'>
+        <div className='my-[2%] text-[0.7em] text-center'>
           {
             isLoginForm ? (
               <p>Don't have an account? <span onClick={() => setIsLoginForm(false)} className='text-blue-600 cursor-pointer'>Register</span></p>

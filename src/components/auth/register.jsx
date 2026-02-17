@@ -36,13 +36,13 @@ const Register = () => {
     }
   }
   return (
-    <div>
+    <div className='text-[4vw] md:text-[2vw]'>
       <form action="" onSubmit={onFormSubmit}>
         <section className='card card-border'>
-          <h2 className="text-center text-[1.5em] font-semibold">Sign Up</h2>
+          <h2 className="text-center text-[1em] font-semibold">Sign Up</h2>
 
           {
-            REGISTRATION_FIELDS?.map((item) => (<div className='flex flex-col' key={item?.id}>
+            REGISTRATION_FIELDS?.map((item) => (<div className='flex flex-col text-[0.5em]' key={item?.id}>
               <label htmlFor={`${item?.id}`}>{item?.label}</label>
               {
                 item?.type === "password" ? (

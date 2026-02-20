@@ -5,9 +5,12 @@ import { loginUser } from '@/store/slices/user-slice';
 import { BASE_URL } from '@/utils/constants';
 import { useNavigate } from 'react-router-dom';
 import Register from './register';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordFieldFocused, setIsPasswordFieldFocused] = useState(false);
   const [emailId, setEmailId] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -38,17 +41,31 @@ const Login = () => {
 
                 <div className="card-actions ">
                   <form onSubmit={handleFormSubmit} className='w-full'>
-                    <div className={`flex flex-col`}>
+                    <div className={`flex flex-col my-2`}>
                       <label htmlFor="emailId">Email ID</label>
                       <input onChange={(e) => setEmailId(e.target.value)} value={emailId}
                         className='border border-white/30 p-[2%] rounded-lg'
                         type="email" id={'emailId'} placeholder='Enter your email' />
                     </div>
-                    <div className={`flex flex-col`}>
+                    <div className={`flex flex-col my-2 relative`}>
                       <label htmlFor="password">Password</label>
-                      <input onChange={(e) => setPassword(e.target.value)} value={password}
-                        className='border border-white/30 p-[2%] rounded-lg'
-                        type="password" id={'password'} placeholder='Enter your password' />
+                     <div className={`p-[2%] rounded-lg 
+                      ${isPasswordFieldFocused ? 'border-2 border-white' : 'border border-white/30'}`}>
+                       <input onFocus={() => setIsPasswordFieldFocused(true)} onBlur={() => setIsPasswordFieldFocused(false)}
+                       onChange={(e) => setPassword(e.target.value)} value={password}
+                        className={`border-none w-full focus:ring-0 focus:outline-none bg-transparent `}
+                        type={isPasswordVisible ? "text" : "password"} id={'password'} placeholder='Enter your password' 
+                        />
+                    
+                    {
+                      isPasswordVisible ? (
+                        <EyeOff onClick={() => setIsPasswordVisible(false)} className='absolute right-3 top-7 cursor-pointer' />
+                      ) : (
+                        <Eye onClick={() => setIsPasswordVisible(true)} className='absolute right-3 top-7 cursor-pointer' />
+                      )
+                    }
+                   
+                     </div>
                     </div>
 
                     <button type='submit' className="btn btn-primary my-[2%]">Login</button>

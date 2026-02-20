@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MergeLogo from "@/assets/logo/merge-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL, USER_ICON_IMAGE } from "@/utils/constants";
@@ -11,7 +11,12 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const loggedInUser = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const loc = useLocation();
   const dispatch = useDispatch();
+
+  const path = loggedInUser && ( loc?.pathname === "/login" || loc?.pathname === "/register" || loc?.pathname === "/") ?
+"/feed"
+  : "/"
 
   const logout = async () => {
     try {
@@ -27,21 +32,25 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 left-0 right-0 z-50 border-b border-base-100 bg-black/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="btn btn-ghost text-xl w-[17.5%]">
+        <Link to={`${path}`} className="btn btn-ghost text-xl w-[17.5%]">
           <img className={``} src={MergeLogo} slot="Merge Logo" />
         </Link>
+        {
+         ( loc?.pathname === "/login" || loc?.pathname === "/register" || loc?.pathname === "/") && (
+            <nav className="hidden items-center gap-8 md:flex">
+              <Link href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                How It Works
+              </Link>
+              <Link href="#who-its-for" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                Who It{"'"}s For
+              </Link>
+              <Link href="#why-merge" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                Why Merge
+              </Link>
+            </nav>
+          )
+        }
 
-        <nav className="hidden items-center gap-8 md:flex">
-          <Link href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            How It Works
-          </Link>
-          <Link href="#who-its-for" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Who It{"'"}s For
-          </Link>
-          <Link href="#why-merge" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Why Merge
-          </Link>
-        </nav>
 
         <div className="hidden items-center gap-4 md:flex">
           {

@@ -62,9 +62,9 @@ const WhyMerge = () => {
               {/* Mock profile cards stack */}
               <div className="space-y-4">
                 {/* Card 1 */}
-                <div className="rounded-xl border border-border bg-secondary/50 p-4 transition-transform hover:-translate-y-1">
+                <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 transition-transform hover:-translate-y-1">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-linear-to-br from-primary to-accent" />
+                    <div className="h-12 w-12 rounded-full bg-linear-to-br from-black to-blue-200" />
                     <div>
                       <div className="font-semibold text-foreground">Alex Chen</div>
                       <div className="text-sm text-muted-foreground">Full-Stack Developer</div>
@@ -98,9 +98,9 @@ const WhyMerge = () => {
                 </div>
 
                 {/* Card 3 */}
-                <div className="rounded-xl border border-border bg-secondary/50 p-4 opacity-60">
+                <div className="rounded-xl border border-border border border-primary/30 p-4 bg-primary/5 opacity-60">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-linear-to-br from-chart-3 to-chart-5" />
+                    <div className="h-12 w-12 rounded-full bg-linear-to-br from-black to-[#f8f8ff]" />
                     <div>
                       <div className="font-semibold text-foreground">Marcus Johnson</div>
                       <div className="text-sm text-muted-foreground">Backend Engineer</div>

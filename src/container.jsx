@@ -6,6 +6,8 @@ import { BASE_URL } from "./utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "./store/slices/user-slice";
+import { Toaster, } from 'sonner'
+
 
 const BodyContainer = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const BodyContainer = () => {
   
   return (
     <div>
+       <Toaster />
       <Navbar />
       {/* <h1 className="font-semibold text-red-600">Merge - Where Developers Connect</h1> */}
       <Outlet />

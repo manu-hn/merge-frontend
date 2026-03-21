@@ -37,6 +37,8 @@ jobs:
           port: 22
           script: |
             sudo rm -rf /usr/share/nginx/html/*
+            sudo chown -R ec2-user:ec2-user /usr/share/nginx/html
+            sudo chmod -R 755 /usr/share/nginx/html
 
       - name: Copy build to EC2
         uses: appleboy/scp-action@v0.1.7
